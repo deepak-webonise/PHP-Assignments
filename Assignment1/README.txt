@@ -26,4 +26,4 @@ NOTE:
 1. headerExample1.php, headerExample2.php and redirect are the examples of header.
 2. redirect.php is exapmle of redirect. 
 3.index.php contains the remaining tasks.
-index.php 
+ 
