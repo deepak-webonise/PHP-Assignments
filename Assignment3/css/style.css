@@ -1,0 +1,23 @@
+body
+{
+	margin:0;
+	padding:0;
+	font-size:14px;
+	line-height:16px;
+}
+h3
+{
+	color:#09F;
+	font-size:16px;
+}
+h4
+{
+	color:#000000;
+	font-size:12px;
+}
+.container
+{
+	width:940px;
+	margin:0 auto;
+}
+

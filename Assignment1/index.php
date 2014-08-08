@@ -21,7 +21,7 @@
         }
     }
     /* Find occurance of PHP from string1 and  Find the position where PHP occures in the string 1*/
-    echo '<h3>Occurance of PHP from string 1 is </h3>'.count($occurance);
+    echo '<h3>Occurance of PHP from string 1 is </h3>'.count($occurance);   //we can find by string function "substr_count($string1, 'PHP');
     echo '<h3>Position where PHP occures in string 1 </h3>'.implode(",",$occurance);
 
     //Recursion Function
