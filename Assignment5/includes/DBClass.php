@@ -95,10 +95,11 @@ class DB extends PDO
 	{
 		try 
 		{			
+			
 			$stmt = parent::prepare("UPDATE bookshelf SET name = ? WHERE id = ? ");
 			$stmt->bindParam(1, $bookShelfData['name']);
 			$stmt->bindParam(2, $bookShelfData['bookShelfId']);
-			$stmt->execute();
+			$stmt->execute();		
 			return true;
 			
 		}
@@ -179,7 +180,6 @@ class DB extends PDO
 		$stmt = parent::prepare("SELECT DISTINCT * FROM bookshelf , books WHERE  `bookshelf`.`uid` = ? AND `books`.`bookshelfId`=`bookshelf`.`id`");
 		$stmt->bindParam(1, $userId);
 		$stmt->execute();
-		//var_dump($stmt->fetchAll(PDO::FETCH_ASSOC));
 		return ($stmt->fetchAll());
 	}
 	//function to fetch details of bookshelf 
@@ -250,7 +250,6 @@ class DB extends PDO
 			$stmt = parent::prepare("SELECT DISTINCT * FROM userFiles WHERE  userId = ? ");
 			$stmt->bindParam(1, $userId);
 			$stmt->execute();
-			//var_dump($stmt->fetchAll(PDO::FETCH_ASSOC));
 			return ($stmt->fetchAll(PDO::FETCH_ASSOC));
 		}
  		catch (PDOException $e) {
@@ -266,7 +265,6 @@ class DB extends PDO
 			$stmt = parent::prepare("SELECT DISTINCT * FROM userFiles WHERE  id = ?");
 			$stmt->bindParam(1, $id);
 			$stmt->execute();
-			//var_dump($stmt->fetch(PDO::FETCH_ASSOC));
 			return ($stmt->fetch(PDO::FETCH_ASSOC));
 		}
  		catch (PDOException $e) {

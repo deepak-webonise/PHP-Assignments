@@ -42,7 +42,9 @@ if(isset($_SESSION['userID']))
     
     </tr>
     <tr>
-    	<td><div><input class="form-control" type="password" name="password" placeholder="Enter Password"/></div></td>
+    	<td><div><input class="form-control" type="password" name="password" placeholder="Enter Password"/></div>
+                <span>Must contain Uppercase,Lowercase and Numbers</span>
+      </td>
     
     </tr>
 

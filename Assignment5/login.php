@@ -1,20 +1,41 @@
+<div class="col-lg-3">
+</div>
 <?php
 session_start();
 require_once("header.php");
 require_once "includes/require.php";
 if(isset($_POST['submit']))
 {
-	 $userData['email'] = $_POST['email'];
-	$userData['password'] = $_POST['password'];
-
-  if($db->login($userData))
+  $userData['email'] = $_POST['email'];
+  $userData['password'] = $_POST['password'];
+  $message=NULL;
+  if(!isEmpty($userData['email']))
   {
-    header("Location: index.php");
+	$message.="Email ";
+		
+  }
+  if(!isEmpty($userData['password']))
+  {
+	$message.="Password";
+	
   }
   else
   {
-    echo '<p>Invalid UserName or Password</p>';
+	  if($db->login($userData))
+	  {
+	    header("Location: index.php");
+	  }
+	  else
+	  {
+	    echo '<p class="text-danger">Invalid UserName or Password</p>';
+	  }
+
   }
+  if(isset($message))
+  {
+  	echo '<p class="text-danger">Please enter'.$message.'</p>';
+  }
+  
 }
 
 ?>

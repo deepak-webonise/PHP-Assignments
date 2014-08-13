@@ -71,7 +71,9 @@ require_once "includes/require.php";
     
     </tr>
     <tr>
-    	<td><div><input class="form-control" type="password" name="password" placeholder="Enter Password of length 6"/></div></td>
+    	<td><div><input class="form-control" type="password" name="password" placeholder="Enter Password of length 6"/></div>
+    				<span>Must contain Uppercase,Lowercase and Numbers</span>
+    	</td>
     
     </tr>
 

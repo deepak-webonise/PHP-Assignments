@@ -10,15 +10,48 @@
 	}
 	if(isset($_POST['submit']))
 	{
-		$bookDetails['name']=$_POST['bookName'];
-		$bookDetails['author']= $_POST['author'];
-		$bookDetails['publisher']= $_POST['publisher'];
-		$bookDetails['description']= $_POST['description'];
-		$bookDetails['bookShelfId']=$_POST['bookShelfId'];
-		if($db->insertBook($bookDetails))
+		$bookDetails['name']= htmlentities($_POST['bookName']);
+		$bookDetails['author']= htmlentities($_POST['author']);
+		$bookDetails['publisher']= htmlentities($_POST['publisher']);
+		$bookDetails['description']= htmlentities($_POST['description']);
+		$bookDetails['bookShelfId']=htmlentities($_POST['bookShelfId']);
+		$message = NULL;
+		if(!isEmpty($bookDetails['name']))
 		{
-			echo '<p class="text-success">Successfully Added</p>';
+			$message.="Name of Book ";
+		
 		}
+		if(!isEmpty($bookDetails['author']))
+		{
+			$message.="Author Name ";
+		
+		}
+		if(!isEmpty($bookDetails['publisher']))
+		{
+			$message.="Publisher Name ";
+		
+		}
+		if(!isEmpty($bookDetails['description']))
+		{
+			$message.="Description about book ";
+		
+		}
+		else
+		{
+			if($db->insertBook($bookDetails))
+			{
+				echo '<p class="text-success">Successfully Added</p>';
+			}
+			else
+			{
+				echo '<p class="text-danger">Unsuccessfull to  Add new book Please retry.</p>';
+			}
+		}
+		if(isset($message))
+		{
+			echo '<p class="text-danger">Please enter'.$message.'</p>';
+		}
+		
 	}
 	    
 ?>

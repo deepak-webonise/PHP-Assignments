@@ -17,16 +17,25 @@
 	//Receiving data on submit
 	if(isset($_POST['submit']))
 	{
-		$bookShelf['name']=$_POST['bookShelfName'];
-		$bookShelf['bookShelfId']=$_POST['bookShelfId'];
-		if($db->updateBookShelf($bookShelf))
+		$bookShelf['name']=htmlentities($_POST['bookShelfName']);
+		$bookShelf['bookShelfId']= $_POST['bookShelfId'];
+		if(!isEmpty($bookShelf['name']))
 		{
-			echo '<p class="text-success">Successfully Updated</p>';
+			echo '<p class="text-danger">Please Enter Valid Bookshelf Name</p>';
+		
 		}
 		else
 		{
-			echo '<p class="text-danger">Unsuccessfully Updated</p>';
+			if($db->updateBookShelf($bookShelf))
+			{
+				echo '<p class="text-success">Successfully Updated</p>';
+			}
+			else
+			{
+				echo '<p class="text-danger">Unsuccessfully Updated</p>';
+			}
 		}
+		
 	}
 	//Receiving data on user clicks on click
 	if(isset($_GET['id']))

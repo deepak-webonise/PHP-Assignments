@@ -15,16 +15,49 @@ session_start();
 <?php
 	if(isset($_POST['submit']))
 	{
-		$bookDetails['name']=$_POST['bookName'];
-		$bookDetails['author']= $_POST['author'];
-		$bookDetails['publisher']= $_POST['publisher'];
+		$bookDetails['name']= htmlentities($_POST['bookName']);
+		$bookDetails['author']= htmlentities($_POST['author']);
+		$bookDetails['publisher']= htmlentities($_POST['publisher']);
 		$bookDetails['description']= $_POST['description'];
 		$bookDetails['bookShelfId']=$_POST['bookShelfId'];
 		$bookDetails['bookId']=$_POST['bookId'];
-		if($db->updateBook($bookDetails))
+		
+		if(!isEmpty($bookDetails['name']))
 		{
-			echo '<p class="text-success">Successfully Updated</p>';
+			$message.="Name of Book ";
+		
 		}
+		if(!isEmpty($bookDetails['author']))
+		{
+			$message.="Author Name ";
+		
+		}
+		if(!isEmpty($bookDetails['publisher']))
+		{
+			$message.="Publisher Name ";
+		
+		}
+		if(!isEmpty($bookDetails['description']))
+		{
+			$message.="Description about book ";
+		
+		}
+		else
+		{
+			if($db->updateBook($bookDetails))
+			{
+				echo '<p class="text-success">Successfully Updated</p>';
+			}
+			else
+			{
+				echo '<p class="text-danger">Unsuccessfull to  update book. Please retry.</p>';
+			}
+		}
+		if(isset($message))
+		{
+			echo '<p class="text-danger">Please enter'.$message.'</p>';
+		}
+
 	}
 	if(isset($_GET['id']))
 	{
@@ -97,7 +130,7 @@ session_start();
 		</tr>
 		<?php  
 			foreach($opt as $value){
-				echo '<tr><td>'.$value[name].'</td><td>'.$value[1].'</td>
+				echo '<tr><td>'.$value['name'].'</td><td>'.$value[1].'</td>
 					 <td><a href="editBooks.php?id='.$value[3].'&bsid='.$value[0].'">Edit</a></td></tr>';
 			}
 				

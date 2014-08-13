@@ -30,45 +30,18 @@ session_start();
 	?>
 		<form action="deleteBook.php" method="post">
   		<div class="form-group">
-    		<label>Book Name</label>
-    		<input type="text" class="form-control" name="bookName" id="bookName" value="<?php echo $bookDetails['name'];?>" placeholder="Enter Book Name"/>
-  		</div>
-  		<div class="form-group">
-    		<label>Author Name</label>
-    		<input type="text" class="form-control" name="author" id="author" value="<?php echo $bookDetails['author'];?>" placeholder="Enter Author Name"/>
-  		</div>
-  		<div class="form-group">
-    		<label>Publisher Name</label>
-    		<input type="text" class="form-control" name="publisher" id="publisher" value="<?php echo $bookDetails['publisher'];?>" placeholder="Enter Publisher Name"/>
-  		</div>
-  		<div class="form-group">
-    		<label>Book Description</label>
-    		<textarea class="form-control" name="description" id="description" placeholder="Enter Book Description"><?php echo $bookDetails['description'];?>"</textarea>
-  		</div>
-  		<div class="form-group">
-    		<label>Select BookShelf</label>
-    		<select name="bookShelfId">
-    		<?php
-    			
-    			$opt = $db->getBookShelf($_SESSION['userID']);
-    			print_r($opt);
-    			foreach($opt as $value){
-    				if($value['id'] == $bookDetails['bookshelfId'] )
-    				{
-    					echo '<option value="'.$value['id'].'" selected>'.$value['name'].'</option>';
-    				}
-    				else
-    				{
-    					echo '<option value="'.$value['id'].'">'.$value['name'].'</option>';
-    				}
-    				
-    			}
-
-
-    		?>
-    		</select>
+    		<label>Book Name : <?php echo $bookDetails['name'];?></label>
     		
   		</div>
+  		<div class="form-group">
+    		<label>Author Name : <?php echo $bookDetails['author'];?></label>
+    		
+  		</div>
+  		<div class="form-group">
+    		<label>Publisher Name : <?php echo $bookDetails['publisher'];?></label>
+    		
+  		</div>
+    		
   		<input type="hidden" name="bookId" value="<?php echo $bookDetails['id'];?>"/>
   		<button type="submit" name="submit" class="btn btn-default">Confirm Delete</button>
    		
@@ -96,7 +69,7 @@ session_start();
 		<?php  
 			foreach($opt as $value){
 				echo '<tr><td>'.$value[name].'</td><td>'.$value[1].'</td>
-					 <td><a href="deleteBook.php?id='.$value[3].'&bsid='.$value[0].'">Edit</a></td></tr>';
+					 <td><a href="deleteBook.php?id='.$value[3].'&bsid='.$value[0].'">Delete</a></td></tr>';
 			}
 				
 		?>	

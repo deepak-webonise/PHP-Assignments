@@ -1,3 +1,6 @@
+<div class="col-lg-3">
+
+</div>
 <?php
 	session_start();
 	require_once("header.php");
@@ -9,12 +12,25 @@
 	}
 	if(isset($_POST['submit']))
 	{
-		$bookShelf['name']=$_POST['bookShelfName'];
+		$bookShelf['name']=htmlentities($_POST['bookShelfName']);
 		$bookShelf['userID']= $_SESSION['userID'];
-		if($db->insertBookShelf($bookShelf))
+		if(!isEmpty($bookShelf['name']))
 		{
-			echo '<p class="text-success">Successfully Added</p>';
+			echo '<p class="text-danger">Please Enter Valid Bookshelf Name</p>';
+		
 		}
+		else
+		{
+			if($db->insertBookShelf($bookShelf))
+			{
+				echo '<p class="text-success">Successfully Added</p>';
+			}
+			else
+			{
+				echo '<p class="text-danger">Unsuccessfull to add new Bookshelf</p>';
+			}
+		}
+		
 	}
 ?>
 <div class="col-lg-3">

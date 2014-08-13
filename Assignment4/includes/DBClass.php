@@ -112,7 +112,7 @@ class DB extends PDO
 	{
 		try 
 		{
-			$stmt = parent::prepare("delete  FROM bookshelf WHERE  id = ? ");
+			$stmt = parent::prepare("DELETE  FROM bookshelf WHERE  id = ? ");
 			$stmt->bindParam(1, $id);
 			$stmt->execute();
 
@@ -127,7 +127,7 @@ class DB extends PDO
 	{
 		try 
 		{
-			$stmt = parent::prepare("delete  FROM books WHERE  id = ? ");
+			$stmt = parent::prepare("DELETE  FROM books WHERE  id = ? ");
 			$stmt->bindParam(1, $id);
 			$stmt->execute();
 
@@ -223,6 +223,72 @@ class DB extends PDO
 		$stmt->execute();
 		return ($stmt->fetch(PDO::FETCH_ASSOC));
 		
+	}
+	//function to store uploaded file name in database
+	function insertFile($fileName,$orignalName,$userId)
+	{
+		try 
+		{			
+			$stmt = parent::prepare("INSERT INTO userFiles (name,orignalName,userId)VALUES(?,?,?)");
+			$stmt->bindParam(1, $fileName);
+			$stmt->bindParam(2, $orignalName);
+			$stmt->bindParam(3, $userId);
+			$stmt->execute();
+			return true;
+			
+		}
+ 		catch (PDOException $e) {
+   			 echo 'ERROR: ' . $e->getMessage();
+			 die();
+		}
+	}
+	//get list of user files
+	function getFiles($userId)
+	{
+		try 
+		{
+			$stmt = parent::prepare("SELECT DISTINCT * FROM userFiles WHERE  userId = ? ");
+			$stmt->bindParam(1, $userId);
+			$stmt->execute();
+			//var_dump($stmt->fetchAll(PDO::FETCH_ASSOC));
+			return ($stmt->fetchAll(PDO::FETCH_ASSOC));
+		}
+ 		catch (PDOException $e) {
+   			 echo 'ERROR: ' . $e->getMessage();
+			 die();
+		}
+	}
+	//get the content of files
+	function getFileContent($id)
+	{
+		try 
+		{
+			$stmt = parent::prepare("SELECT DISTINCT * FROM userFiles WHERE  id = ?");
+			$stmt->bindParam(1, $id);
+			$stmt->execute();
+			//var_dump($stmt->fetch(PDO::FETCH_ASSOC));
+			return ($stmt->fetch(PDO::FETCH_ASSOC));
+		}
+ 		catch (PDOException $e) {
+   			 echo 'ERROR: ' . $e->getMessage();
+			 die();
+		}
+	}
+	//Function to delete file
+	function deleteFile($id)
+	{
+		try 
+		{
+			$stmt = parent::prepare("DELETE  FROM userFiles WHERE  id = ? ");
+			$stmt->bindParam(1, $id);
+			$stmt->execute();
+			return true;
+
+		}
+ 		catch (PDOException $e) {
+   			 echo 'ERROR: ' . $e->getMessage();
+			 die();
+		}
 	}
 	
 }
